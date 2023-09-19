@@ -21,7 +21,9 @@ coord_y = 0
 figureType = ""
 
 # Velocidad de movimiento
-speed_y = 1
+speed_y = 10
+speed_x = 0
+
 
 screen = pygame.display.set_mode(size)
 
@@ -39,6 +41,26 @@ while True:
         speed_y = 0
     
     coord_y += speed_y
+
+    #--------------Mover fichas------------
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            speed_x = -10
+        if event.key == pygame.K_RIGHT:
+            speed_x = 10
+        if event.key == pygame.K_DOWN:
+            speed_y = 10
+                 
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT:
+            speed_x = 0
+        if event.key == pygame.K_RIGHT:
+            speed_x = 0 
+        if event.key == pygame.K_DOWN:
+            speed_y = 0   
+
+    coord_x += speed_x 
+    coord_y += speed_y
     
     # ------------- Logica ------------------
 
@@ -50,8 +72,6 @@ while True:
     #------------ Zona de Dibujo--------------
     
     fd.drawL(screen,coord_x,coord_y)
-    fd.drawJ(screen, coord_x + 40, coord_y)
-    fd.drawO(screen, coord_x, coord_y)
     figureType = "L"
     #------------ Zona de Dibujo--------------
 
@@ -59,6 +79,6 @@ while True:
     pygame.display.flip()
     
     # Metodo para controlar los FPS del juego
-    clock.tick(60)
+    clock.tick(1)
 
 
