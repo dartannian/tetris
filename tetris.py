@@ -51,6 +51,7 @@ while True:
     
     fd.drawL(screen,coord_x,coord_y)
     fd.drawJ(screen, coord_x + 40, coord_y)
+    fd.drawO(screen, coord_x, coord_y)
     figureType = "L"
     #------------ Zona de Dibujo--------------
 
