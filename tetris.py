@@ -46,9 +46,11 @@ while True:
     screen.fill(TETRIS_BACKGROUND)
 
     
+    
     #------------ Zona de Dibujo--------------
     
     fd.drawL(screen,coord_x,coord_y)
+    fd.drawJ(screen, coord_x + 40, coord_y)
     figureType = "L"
     #------------ Zona de Dibujo--------------
 
