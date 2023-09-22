@@ -37,12 +37,32 @@ def drawT(surface,coord_x,coord_y):
     pygame.draw.rect(surface, GREEN, (coord_x,coord_y + 10,10,10))
     drawBoard(surface)
 
-def drawL(surface,coord_x,coord_y):
-    pygame.draw.rect(surface, GREEN, (coord_x,coord_y + 10,10,10))
-    pygame.draw.rect(surface, GREEN, (coord_x + 10,coord_y + 10,10,10))
-    pygame.draw.rect(surface, GREEN, (coord_x + 10,coord_y,10,10))
-    pygame.draw.rect(surface, GREEN, (coord_x - 10,coord_y + 10,10,10))
-    drawBoard(surface)
+def drawL(surface,coord_x,coord_y, orientation):
+    if orientation == 0:
+        pygame.draw.rect(surface, GREEN, (coord_x,coord_y + 10,10,10))
+        pygame.draw.rect(surface, GREEN, (coord_x + 10,coord_y + 10,10,10))
+        pygame.draw.rect(surface, GREEN, (coord_x + 10,coord_y,10,10))
+        pygame.draw.rect(surface, GREEN, (coord_x - 10,coord_y + 10,10,10))
+        drawBoard(surface)
+    elif orientation == 1:
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y + 10, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y + 20, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x + 10, coord_y + 20, 10, 10)) 
+        drawBoard(surface)  
+    elif orientation == 2:
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y + 10, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x + 10, coord_y, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x + 20, coord_y, 10, 10)) 
+        drawBoard(surface)      
+    elif orientation == 3:
+        pygame.draw.rect(surface, GREEN, (coord_x - 10, coord_y, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y + 10, 10, 10))
+        pygame.draw.rect(surface, GREEN, (coord_x, coord_y + 20, 10, 10))
+        drawBoard(surface)
+   
 
 def drawJ(surface,coord_x,coord_y):
     pygame.draw.rect(surface, GREEN, (coord_x,coord_y + 10,10,10))
