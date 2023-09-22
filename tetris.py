@@ -1,4 +1,4 @@
-import pygame, sys, figureDrawer as fd, figureMove as fm
+import pygame, sys, figureDrawer as fd, figureMove as fm, figureChoose as fc
 pygame.init()
 
 #Definir colores 
@@ -30,7 +30,8 @@ move_down = False
 #Orientacion Ficha
 orientation = 0
 
-
+#case = fc.chooseFigure()
+case = 1
 screen = pygame.display.set_mode(size)
 
 # Se crea reloj para controlar los FPS del juego
@@ -91,8 +92,27 @@ while True:
     
     #------------ Zona de Dibujo--------------
     # Llama a la función drawL con la orientación actual
-    fd.drawL(screen,coord_x,coord_y, orientation)
-    figureType = "L"
+    if case == 1:
+        fd.drawZ(coord_x, coord_y, orientation)
+        figureType = "Z"
+    if case == 2:
+        fd.drawS(coord_x, coord_y, orientation)
+        figureType = "S"
+    if case == 3:
+        fd.drawT(coord_x, coord_y, orientation)
+        figureType = "T"
+    if case == 4:
+        fd.drawL(coord_x, coord_y, orientation)
+        figureType = "L"
+    if case == 5:
+        fd.drawJ(coord_x, coord_y, orientation)
+        figureType = "J"
+    if case == 6:
+        fd.drawI(coord_x, coord_y, orientation)
+        figureType = "I"
+    if case == 7:
+        fd.drawO(coord_x, coord_y, orientation)
+        figureType = "O"
     #------------ Zona de Dibujo--------------
 
     # Metodo para actualizar pantalla
