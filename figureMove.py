@@ -15,9 +15,11 @@ def stopFigure(coord_y,size_y,figureType):
         if(coord_y > size_y - 20):
             return True
     if(figureType == "I"):
-        if(coord_y > size_y - 10):
+        if(coord_y > size_y - 20):
             return True
     if(figureType == "O"):
         if(coord_y > size_y - 20):
             return True
+        
+    
     

@@ -9,15 +9,22 @@ GREEN = (0,255,0)
 RED = (255,0,0)
 BLUE = (0,0,255)
 TETRIS_BACKGROUND = (33,74,86)
+TETRIS_MARGIN = (250,205,29)
 
 # Tamaño de la ventana
 ancho = 800
 largo = 600
 size = (ancho,largo)
 
+#coordSaved = {"surface":"","coord_x":0,"coord_y":0,"orientation":0, "case":0}
+coordSaved = []
+# Variable para indicar que la ficha se detuvo
+
+stopped = False
+
 # Coordenadas de la figura
 coord_x = 400
-coord_y = 0
+coord_y = 100
 figureType = ""
 
 # Velocidad de movimiento
@@ -29,9 +36,11 @@ move_down = False
 
 #Orientacion Ficha
 orientation = 0
+case = 0
 
-case = fc.chooseFigure()
 screen = pygame.display.set_mode(size)
+
+
 
 # Se crea reloj para controlar los FPS del juego
 clock = pygame.time.Clock()
@@ -42,10 +51,21 @@ while True:
             sys.exit()
 
     # ------------- Logica ------------------
-
-    if(fm.stopFigure(coord_y,600,figureType)):
-        speed_y = 0
     
+    if(fm.stopFigure(coord_y,500,figureType)):
+        speed_y = 0
+        stopped = True
+    
+
+    if(stopped):
+        coord_x = 400
+        coord_y = 100
+        case = 0
+        speed_y = 10
+        stopped = False
+
+    if(case == 0):
+        case = fc.chooseFigure()
     coord_y += speed_y
 
     if event.type == pygame.KEYDOWN:
@@ -72,14 +92,22 @@ while True:
         speed_y = 3
     elif not move_down and fm.stopFigure(coord_y, 600, figureType):
         speed_y = 0 # Restablece  la velocidad normal de caida 
+        stopped = True
     elif move_down and fm.stopFigure(coord_y, 600, figureType):
         speed_y = 0  
+        stopped = True
     else:
         speed_y = 1
 
-    # Verifica si la figura ha alcanzado la parte inferior o colisionado
-    if fm.stopFigure(coord_y, 200, figureType):
+    # Verifica si la figura ha alcanzado la parte inferior
+    if fm.stopFigure(coord_y, 500, figureType):
         move_down = False  # Detén el movimiento hacia abajo
+        stopped = True
+        
+        
+    if(coord_y == 480):
+        coordSaved.append({"surface":screen, "coord_x":coord_x,"coord_y":coord_y, "orientation":orientation, "case":case})
+
                
 
     coord_x += speed_x 
@@ -90,14 +118,20 @@ while True:
 
     # Se define el color de fondo de la pantalla
     screen.fill(TETRIS_BACKGROUND)
+    fd.drawMargin(screen,260,100)
 
     
     
     #------------ Zona de Dibujo--------------
     # Llama a la función drawL con la orientación actual
+
     
-    fd.drawJ(screen,coord_x,coord_y,orientation)
-    figureType = "J"
+    for figure in coordSaved:
+        fd.drawRandomFigure(**figure)
+
+    fd.drawRandomFigure(screen,coord_x,coord_y,orientation, case)
+    figureType = fc.defineFigureType(case)
+    
 
     #------------ Zona de Dibujo--------------
 
@@ -105,6 +139,6 @@ while True:
     pygame.display.flip()
     
     # Metodo para controlar los FPS del juego
-    clock.tick(80)
+    clock.tick(20)
 
 
