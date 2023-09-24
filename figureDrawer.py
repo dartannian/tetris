@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, figureDrawer
 
 
 #Definir colores 
@@ -15,6 +15,8 @@ def drawBoard(surface):
     for x in range(0,800,10):
         pygame.draw.line(surface, BLACK, (x,0), (x,600), 2)
         pygame.draw.line(surface, BLACK, (0,x), (800,x), 2)
+
+
 
 def drawZ(surface,coord_x,coord_y,orientation):
     if orientation == 0:
@@ -202,3 +204,19 @@ def drawO(surface,coord_x,coord_y, orientation):
         pygame.draw.rect(surface, GREEN, (coord_x + 10,coord_y + 10,10,10))
         drawBoard(surface)     
 
+
+def drawRandomFigure(surface,coord_x,coord_y,orientation, case):
+    if case == 1:
+        drawZ(surface,coord_x, coord_y, orientation)
+    if case == 2:
+        drawS(surface,coord_x, coord_y, orientation)
+    if case == 3:
+        drawT(surface,coord_x, coord_y, orientation)
+    if case == 4:
+        drawL(surface,coord_x, coord_y, orientation)
+    if case == 5:
+        drawJ(surface,coord_x, coord_y, orientation)
+    if case == 6:
+        drawI(surface,coord_x, coord_y, orientation)
+    if case == 7:
+        drawO(surface,coord_x, coord_y, orientation)
